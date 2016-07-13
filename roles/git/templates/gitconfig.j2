@@ -1,87 +1,18 @@
-[hub]
-        protocol = https
+[core]
+	excludesfile = ~/.gitignore_global
 [user]
-        name = {{ full_name }}
-        email = {{ git_email }}
+	name = {{ git_name }}
+	email = {{ git_email }}
+
 {% if ansible_os_family == 'Darwin' %}
+
 [credential]
         helper = osxkeychain
+[difftool "sourcetree"]
+	cmd = /Applications/p4merge.app/Contents/MacOS/p4merge \"$LOCAL\" \"$REMOTE\"
+	path =
+[mergetool "sourcetree"]
+	cmd = /Applications/p4merge.app/Contents/MacOS/p4merge \"$BASE\" \"$LOCAL\" \"$REMOTE\" \"$MERGED\"
+	trustExitCode = true
+
 {% endif %}
-[alias]
-        a = add
-        st = status
-        s = status
-        co = checkout
-        cob = checkout -b
-        c = checkout
-        ci = commit
-        noff = merge --no-ff
-        amend = commit --amend
-        br = branch
-        df = diff
-        dfs = diff --staged
-        # Get changes for a single commit
-        dfc = "!dfc() { git diff $1^ $1; }; dfc"
-        pl = pull
-        pup = pull upstream
-        shorg = push -u origin
-
-        # http://gggritso.com/human-git-aliases
-        unstage = reset -q HEAD --
-        discard = checkout --
-        uncommit = reset --mixed HEAD~
-
-        l = log --graph --decorate --oneline --abbrev-commit --all
-        h = log --graph --decorate --oneline --abbrev-commit
-
-        # Open unstaged files in vim
-        edit = "!f() { ${1-vim} `git ls-files -m`; }; f"
-
-        switch = !legit switch \"$@\"
-        branches = !legit branches
-        sprout = !legit sprout \"$@\"
-        unpublish = !legit unpublish \"$@\"
-        harvest = !legit harvest \"$@\"
-        sync = !legit sync \"$@\"
-        publish = !legit publish \"$@\"
-        graft = !legit graft \"$@\"
-        sw = !legit switch \"$@\"
-
-        issues = !hub browse -- issues
-        url = "!f() { sha=$(git rev-parse ${1:-HEAD}); hub browse -u -- commit/$sha; }; f"
-        # Copy current branch name to clipboard (MacOSX only)
-        cb = "!git rev-parse --abbrev-ref HEAD | tr -d '\n' | pbcopy"
-
-        f = flow
-        fublish = flow feature publish
-        feature = flow feature start
-        fart = flow feature start
-        finfeature = flow feature finish
-        fix = flow hotfix start
-        finfix = flow hotfix finish
-        release = flow release start
-        finrelease = flow release finish
-
-        sub = submodule
-[color]
-        diff = auto
-        status = auto
-        branch = auto
-        ui = true
-[core]
-        excludesfile = ~/.gitignore_global
-        editor = vim
-[apply]
-        whitespace = nowarn
-[mergetool]
-        keepBackup = false
-[difftool]
-        prompt = false
-[push]
-        # See `git help config` (search for push.default)
-        # for more information on different options of the below setting.
-        #
-        # Setting to git 2.0 default to surpress warning message
-        default = simple
-[github]
-        user = {{ git_user }}

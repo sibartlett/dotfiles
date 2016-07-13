@@ -1,0 +1,23 @@
+#  Local home directory
+dotfiles_user_home: "{{ '~' | expanduser }}"
+dotfiles_home: "{{dotfiles_user_home}}/dotfiles"
+
+# Git
+git_name: Simon Bartlett
+git_email: simon@sibartlett.com
+
+osx_homebrew_packages:
+  - node
+
+osx_cask_packages:
+  - 1password
+  - alfred
+  - atom
+  - caffeine
+  - dropbox
+  - iterm2
+  - p4merge
+  - sourcetree
+  - telegram
+  - vlc
+  - ynab

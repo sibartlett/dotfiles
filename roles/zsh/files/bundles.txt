@@ -1,0 +1,6 @@
+# note this is alphabetically sorted
+caarlos0/zsh-mkc
+mafredri/zsh-async
+Tarrasch/zsh-bd
+zsh-users/zsh-completions
+zsh-users/zsh-history-substring-search

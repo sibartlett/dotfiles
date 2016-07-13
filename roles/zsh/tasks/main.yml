@@ -18,9 +18,8 @@
     creates: "{{dotfiles_user_home}}/.zshrc.bak"
   when: zshrc_stat.stat.exists
 
-- include: prezto.yml
-  when: zsh_prezto
-
-- name: Copy minimal zshrc
-  copy: src=zshrc_minimal dest={{dotfiles_user_home}}/.zshrc
-  when: not zsh_prezto
+- name: Link zshrc file
+  file:
+    src: "{{ dotfiles_home }}/roles/zsh/files/zshrc.link"
+    dest: "{{ '~/.zshrc' | expanduser }}"
+    state: link

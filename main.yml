@@ -1,0 +1,10 @@
+- name: Collecting Facts
+  hosts: localhost
+  gather_facts: yes
+
+- name: Set up local development environment
+  hosts: localhost
+  roles:
+    - {role: osx, when: ansible_os_family == "Darwin"}
+    - git
+    - {role: zsh, tags: ['bootstrap']}

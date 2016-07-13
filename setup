@@ -1,0 +1,38 @@
+#!/bin/bash
+if test "$(uname)" = "Darwin"; then
+
+  if test ! $(which gcc); then
+    echo "Installing xcode..."
+    xcode-select --install
+  fi
+
+  echo ''
+
+  if test ! "$(which brew)"; then
+    echo "Installing homebrew..."
+    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  else
+    echo "Updating homebrew..."
+    brew update
+  fi
+
+  echo ''
+
+  if test ! "$(which ansible)"; then
+    echo "Installing ansible..."
+    brew install ansible
+  else
+    echo "Updating ansible..."
+    brew upgrade ansible
+  fi
+
+fi
+
+echo ''
+
+python --version
+ansible --version
+
+echo ''
+
+ansible-playbook main.yml

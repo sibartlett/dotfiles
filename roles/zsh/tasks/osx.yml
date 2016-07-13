@@ -1,5 +1,11 @@
 # OSX zsh installation and setup
 
+- name: Tap into getantibody/antibody
+  homebrew_tap: tap=getantibody/antibody
+
+- name: Make sure antibody is installed
+  homebrew: name=antibody state=latest
+
 - name: Make sure zsh is installed
   homebrew: name=zsh state=latest
 

@@ -1,27 +1,25 @@
 dotfiles
 ========
 
-[sloria's dotfiles](https://github.com/sloria/dotfiles-old), rewritten as Ansible roles. Fully supports MacOSX. Red Hat and Debian support is good but not as complete.
+Ansible powered dotfiles inspired by:
+
+* [sloria's dotfiles](https://github.com/sloria/dotfiles)
+* [caarlos0's machine](https://github.com/caarlos0/machine)
+
+Fully supports MacOSX. Red Hat and Debian support is good but not as complete.
 
 a few neat features
 -------------------
 
-- zsh configured with [prezto](https://github.com/sorin-ionescu/prezto).
-- nice fonts for the terminal and coding.
-- iterm2 profile (w/ hotkey, themes, etc.)
-- anaconda python (Miniconda 3 distribution).
-- a tmux.conf that's pretty neat.
-- vim with [vim-plug](https://github.com/junegunn/vim-plug) for plugin management. All configuration in a single file [.vimrc](https://github.com/sloria/dotfiles/blob/master/roles/vim/files/vimrc).
+- zsh configured with [antibody](https://github.com/getantibody/antibody).
 - pluggable. Everything is optional. Fork this. Remove what you don't use. Configure what you do use.
 - Mac packages installed with [homebrew][]. Mac apps installed with [homebrew-cask][].
-- support for deploying to remote environments.
 
-prerequisites (install these first)
+prerequisites (skip if using macOS)
 -----------------------------------
 
 - ansible >= 1.6
-- homebrew (If on Mac OSX)
-- git (homebrew installable on Mac OSX)
+- git
 
 
 install
@@ -37,19 +35,17 @@ $ git clone https://github.com/YOU/dotfiles.git ~/dotfiles
 $ cd ~/dotfiles
 ```
 
-- Update the following variables in `group_vars/local` (at a minimum)
-    - `full_name`: Your name, which will be attached to commit messages, e.g. "Steven Loria"
-    - `git_user`: Your Github username.
+- Update the following variables in `host_vars/localhost` (at a minimum)
+    - `git_name`: Your name, which will be attached to commit messages, e.g. "Steven Loria"
     - `git_email`: Your git email address.
 - Optional, but recommended: Update `group_vars/local` with the programs you want installed by [homebrew][], [homebrew-cask][], and npm.
     - `osx_homebrew_packages`:  Utilities that don't get installed by the roles.
     - `osx_cask_packages`: Mac Apps you want installed with [homebrew-cask][].
-    - `npm_global_packages`: Node utilities.
-- Edit `local_env.yml` as you see fit. Remove any roles you don't use. Edit roles that you do use.
+- Edit `main.yml` as you see fit. Remove any roles you don't use. Edit roles that you do use.
 - Run the installation script.
 
 ```bash
-$ ./bin/dot-bootstrap
+$ ./setup
 ```
 
 updating
@@ -61,15 +57,6 @@ Once you have the dotfiles installed you can run the following command to rerun 
 $ dot
 ```
 
-commands
---------
-
-There are three main commands in the `bin` directory for setting up and updating development environments:
-
-- `dot-bootstrap`: sets up local environment by executing all roles in `local_env.yml`.
-- `dot`: updates local environment by executing all roles in `local_env.yml` except for the ones tagged with "bootstrap".
-- `dot-remote`: sets up remote environments.
-
 special files
 -------------
 
@@ -77,84 +64,6 @@ All configuration is done in `~/dotfiles`. Each role may contain (in addition to
 
 - **role/\*.zsh**: Any files ending in `.zsh` get loaded into your environment.
 - **bin/**: Anything in `bin/` will get added to your `$PATH` and be made available everywhere.
-
-notes
------
-
-**python**
-
-The `python` topic installs the [Anaconda Python distribution](https://store.continuum.io/cshop/anaconda/) using the [miniconda](http://conda.pydata.org/miniconda.html) installer. The installation is entirely self-contained, and lives at `~/miniconda`.
-
-**iterm2**
-
-To import the iterm2 profile, go to your iterm2 preferences, and enable "Load preferences from custom folder" and select the iterm2 folder in the `misc/` directory.
-
-![iterm2 profile](https://dl.dropboxusercontent.com/u/1693233/github/dotfiles-iterm2.png)
-
-**macosx keyboard settings**
-
-There are a few keyboard customizations that must be done manually:
-
-- Turning repeat speed up to 11.
-
-![Keyboard settings](https://dl.dropboxusercontent.com/u/1693233/github/dotfiles-mac-keys.png "Key repeat settings")
-
-
-- Mapping Caps Lock to Ctrl.
-
-![Modifier keys](https://dl.dropboxusercontent.com/u/1693233/github/dotfiles-mod-keys.png)
-
-setting up remote dev environments
-----------------------------------
-
-The `remote_env.yml` playbook can set up a minimal subset of these dotfiles on remote machines.
-
-- Copy `remotehosts.example` to `remotehosts`. The `remotehosts` file will note be added to version control.
-
-```
-$ cp remotehosts.example remotehosts
-```
-
-- Add the remote hosts you want to target under the `[remote]` group of the `remotehosts` file.
-
-```
-[remote]
-123.456.789.111
-```
-
-Update the following variables in `group_vars/remote`:
-
-- `dotfiles_user_home` : Your user home directory.
-- `full_name`: Full name, for use in commit messages.
-- `git_user` : Your git user name.
-- `git_email` : Your git email.
-
-Then run the `dot-remote` command.
-
-```bash
-$ ./bin/dot-remote
-```
-
-what if I only want your vim?
------------------------------
-
-The following commands will install vim-plug and download my `.vimrc`.
-
-After backing up your `~/.vim` directory and `~/.vimrc`:
-
-```
-mkdir -p ~/.vim/autoload
-curl -fLo ~/.vim/autoload/plug.vim https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-curl -fLo ~/.vimrc https://raw.githubusercontent.com/sloria/dotfiles/master/roles/vim/files/vimrc
-```
-
-You will now be able to open vim and run `:PlugInstall` to install all plugins.
-
-todo
-----
-
-- Full Debian and Red Hat support
-- Add more options to `dot` script, e.g. for skipping tasks
 
 [homebrew]: http://brew.sh/
 [homebrew-cask]: https://github.com/caskroom/homebrew-cask
