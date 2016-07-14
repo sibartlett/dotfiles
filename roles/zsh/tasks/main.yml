@@ -23,3 +23,8 @@
     src: "{{ dotfiles_home }}/roles/zsh/files/zshrc.link"
     dest: "{{ '~/.zshrc' | expanduser }}"
     state: link
+
+- name: Create .hushlogin
+  file:
+    dest: "{{ '~/.hushlogin' | expanduser }}"
+    state: touch
