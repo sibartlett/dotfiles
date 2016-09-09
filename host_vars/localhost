@@ -6,18 +6,34 @@ dotfiles_home: "{{dotfiles_user_home}}/dotfiles"
 git_name: Simon Bartlett
 git_email: simon@sibartlett.com
 
+osx_homebrew_taps:
+  - ravenac95/sudolikeaboss
+
 osx_homebrew_packages:
+  - mercurial
   - node
+  - mongodb
+  - postgresql
+  - rabbitmq
+  - sudolikeaboss
+  - wget
 
 osx_cask_packages:
   - 1password
   - alfred
   - atom
   - caffeine
+  - docker
+  - dotnet
   - dropbox
+  - hyperterm
   - iterm2
   - p4merge
   - sourcetree
+  - steam
   - telegram
+  - visual-studio-code
+  - virtualbox
   - vlc
+  - wireshark
   - ynab
