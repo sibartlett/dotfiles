@@ -7,9 +7,11 @@ git_name: Simon Bartlett
 git_email: simon@sibartlett.com
 
 osx_homebrew_taps:
+  - getantibody/antibody
   - ravenac95/sudolikeaboss
 
 osx_homebrew_packages:
+  - antibody
   - mercurial
   - node
   - mongodb
@@ -17,6 +19,7 @@ osx_homebrew_packages:
   - rabbitmq
   - sudolikeaboss
   - wget
+  - zsh
 
 osx_cask_packages:
   - 1password
@@ -26,7 +29,8 @@ osx_cask_packages:
   - docker
   - dotnet
   - dropbox
-  - hyperterm
+  - flux
+  - hyper
   - iterm2
   - p4merge
   - sourcetree
