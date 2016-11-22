@@ -1,5 +1,6 @@
 # these are alphabetically sorted
 caarlos0/zsh-mkc
+horosgrisa/autoenv
 mafredri/zsh-async
 Tarrasch/zsh-bd
 zsh-users/zsh-completions
