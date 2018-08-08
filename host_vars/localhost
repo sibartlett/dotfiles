@@ -11,13 +11,8 @@ osx_homebrew_taps:
 
 osx_homebrew_packages:
   - antibody
-  - mercurial
-  - node
-  - mongodb
-  - postgresql
-  - rabbitmq
-  - sudolikeaboss
-  - wget
+  - nvm
+  - yarn
   - zsh
 
 osx_cask_packages:
