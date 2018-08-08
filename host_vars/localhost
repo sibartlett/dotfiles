@@ -8,7 +8,6 @@ git_email: simon@sibartlett.com
 
 osx_homebrew_taps:
   - getantibody/antibody
-  - ravenac95/sudolikeaboss
 
 osx_homebrew_packages:
   - antibody
